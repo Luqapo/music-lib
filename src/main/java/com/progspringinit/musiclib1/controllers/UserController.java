@@ -1,4 +1,4 @@
-package com.progspringinit.musiclib1.comtrollers;
+package com.progspringinit.musiclib1.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.progspringinit.musiclib1.comtrollers;
+package com.progspringinit.musiclib1.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -45,7 +45,7 @@ public class SongController {
 	
 	@PatchMapping(path = "/{id}", consumes = "application/json-patch+json")
 	@ResponseStatus(HttpStatus.OK)
-	public SongDTO patchSong(@PathVariable Long id, JsonPatch patch) {
+	public SongDTO patchSong(@PathVariable Long id, @RequestBody JsonPatch patch) {
 		return songService.patchSong(id, patch);
 	}
 	
