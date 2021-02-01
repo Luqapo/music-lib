@@ -1,5 +1,6 @@
 package com.progspringinit.musiclib1.services;
 
+import com.github.fge.jsonpatch.JsonPatch;
 import com.progspringinit.musiclib1.api.model.PlaylistDTO;
 import com.progspringinit.musiclib1.api.model.PlaylistsListDTO;
 import com.progspringinit.musiclib1.api.model.SongsListDTO;
@@ -12,4 +13,5 @@ public interface PlaylistService {
 	void deletePlaylistById(Long id);
 	PlaylistDTO addSong(Long id, Long songId);
 	SongsListDTO getPlaylistSongs(Long playlistId);
+	PlaylistDTO patchPlaylist(Long id, JsonPatch patch);
 }

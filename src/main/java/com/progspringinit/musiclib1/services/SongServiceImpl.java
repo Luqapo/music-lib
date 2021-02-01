@@ -77,9 +77,9 @@ public class SongServiceImpl implements SongService {
 	@Override
 	public SongDTO patchSong(Long id, JsonPatch patch) {
 		try {
-			Song song = songRepository.findById(id).orElseThrow(SongNotFoundException::new);
-			Song songPatched = applyPatchToSong(patch, song);
-			Song savedSong = songRepository.save(songPatched);
+			SongDTO song = songMapper.songToDTO(songRepository.findById(id).orElseThrow(SongNotFoundException::new));
+			SongDTO songPatched = applyPatchToSong(patch, song);
+			Song savedSong = songRepository.save(songMapper.songDTOToSong(songPatched));
 			return songMapper.songToDTO(savedSong);
 		} catch (SongNotFoundException e)  {
 			System.out.println("Song not found!!!");
@@ -92,8 +92,8 @@ public class SongServiceImpl implements SongService {
 		}
 	}
 	
-	private Song applyPatchToSong(JsonPatch patch, Song targetSong) throws JsonPatchException, JsonProcessingException {
+	private SongDTO applyPatchToSong(JsonPatch patch, SongDTO targetSong) throws JsonPatchException, JsonProcessingException {
         JsonNode patched = patch.apply(objectMapper.convertValue(targetSong, JsonNode.class));
-        return objectMapper.treeToValue(patched, Song.class);
+        return objectMapper.treeToValue(patched, SongDTO.class);
     }
 }

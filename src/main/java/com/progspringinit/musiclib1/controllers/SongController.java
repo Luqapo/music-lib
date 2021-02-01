@@ -7,8 +7,9 @@ import com.progspringinit.musiclib1.api.model.SongDTO;
 import com.progspringinit.musiclib1.api.model.SongsListDTO;
 import com.progspringinit.musiclib1.services.SongService;
 
+@CrossOrigin
 @RestController
-@RequestMapping("/api/song/")
+@RequestMapping("/api/song")
 public class SongController {
 	private SongService songService;
 	

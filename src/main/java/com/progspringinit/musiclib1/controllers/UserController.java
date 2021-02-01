@@ -2,12 +2,15 @@ package com.progspringinit.musiclib1.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import com.progspringinit.musiclib1.api.model.AuthenticationResponse;
+import com.progspringinit.musiclib1.api.model.LoginRequestModel;
 import com.progspringinit.musiclib1.api.model.UserDTO;
 import com.progspringinit.musiclib1.api.model.UsersListDTO;
 import com.progspringinit.musiclib1.services.UserService;
 
+@CrossOrigin
 @RestController
-@RequestMapping("/api/user/")
+@RequestMapping("/api/user")
 public class UserController {
 	private UserService userService;
 
@@ -33,6 +36,12 @@ public class UserController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public UserDTO createNewUser(@RequestBody UserDTO userDTO) {
 		return userService.createNewUser(userDTO);
+	}
+	
+	@PostMapping("/authenticate")
+	@ResponseStatus(HttpStatus.OK)
+	public AuthenticationResponse createAuthenticationToken(@RequestBody LoginRequestModel loginRequest) {
+		return userService.authnticateUser(loginRequest);
 	}
 	
 	@PutMapping("{id}")

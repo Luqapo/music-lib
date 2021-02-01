@@ -3,13 +3,15 @@ package com.progspringinit.musiclib1.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import com.github.fge.jsonpatch.JsonPatch;
 import com.progspringinit.musiclib1.api.model.PlaylistDTO;
 import com.progspringinit.musiclib1.api.model.PlaylistsListDTO;
 import com.progspringinit.musiclib1.api.model.SongsListDTO;
 import com.progspringinit.musiclib1.services.PlaylistService;
 
+@CrossOrigin
 @RestController
-@RequestMapping("/api/playlist/")
+@RequestMapping("/api/playlist")
 public class PlaylistController {
 	PlaylistService playlistService;
 
@@ -19,7 +21,7 @@ public class PlaylistController {
 	
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-	public PlaylistsListDTO getAllPlaylists(@PathVariable Long userId) {
+	public PlaylistsListDTO getAllPlaylists(@RequestParam Long userId) {
 		return playlistService.getAllPlaylist(userId);
 	}
 	
@@ -39,6 +41,12 @@ public class PlaylistController {
 	@ResponseStatus(HttpStatus.OK)
 	public PlaylistDTO updatePlaylist(@PathVariable Long id, @RequestBody PlaylistDTO playlistDTO) {
 		return playlistService.updatePlaylist(id, playlistDTO);
+	}
+	
+	@PatchMapping(path = "/{id}", consumes = "application/json-patch+json")
+	@ResponseStatus(HttpStatus.OK)
+	public PlaylistDTO patchPlaylist(@PathVariable Long id, @RequestBody JsonPatch patch) {
+		return playlistService.patchPlaylist(id, patch);
 	}
 	
 	@DeleteMapping("{id}")

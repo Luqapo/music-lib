@@ -17,17 +17,12 @@ public class Playlist {
 	Long id;
 	String name;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
 	private User user;
+	
 	@ManyToMany
 	private Set<Song> songs = new HashSet<>();
 	
-	public Playlist() {
-	}
-	public Playlist(Long id, String name, User user) {
-		this.id = id;
-		this.name = name;
-		this.user = user;
-	}
+	public Playlist() {}
 }

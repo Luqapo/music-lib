@@ -1,8 +1,6 @@
 package com.progspringinit.musiclib1.domain;
 
-import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,11 +16,12 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String gender;
+	@Column(unique=true)
 	private String email;
 	private String password;
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Set<Playlist> playlists = new HashSet<>();
+	private Set<Playlist> playlists;
 	
 	public User() {	
 	}

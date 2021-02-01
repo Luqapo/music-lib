@@ -7,4 +7,5 @@ import com.progspringinit.musiclib1.domain.User;
 
 public interface UserRepository extends JpaRepository<User, Long>  {
 	public List<User> getByFirstName(String name);
+	public User findByEmail(String email);
 }
